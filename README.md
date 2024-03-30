@@ -1,4 +1,4 @@
-This is a  COVID-19 locational tracker database using Python, HTML, and CSS. In this database, COVID-positive users can input locations in the Philippines that they have
+This is a  COVID-19 locational tracker using Python, HTML, and CSS. In this database, COVID-positive users can input locations in the Philippines that they have
 visited during their two-week incubation period, as well as the dates of their visit. The database will also keep track of other supplementary information, such as how many individuals
 have inputted data into the database.
 
