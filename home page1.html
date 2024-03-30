@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles1.css">
+</head>
+
+<!-- START OF HEADER -->
+<header id="header">
+  <div class="wrapper">
+    <div class="logo">
+      <img src="https://scontent.fmnl30-2.fna.fbcdn.net/v/t1.15752-9/275092832_300683318829693_4508308481604905390_n.png?_nc_cat=100&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHhwM2DWMzrrZBx__HQwm5IgTGlMy3FRkyBMaUzLcVGTIWnkA4-Ss3Qw8hLdqo_KOSiwCF_7AZbXL9aww_wLZmS&_nc_ohc=AuR0_U1sPI0AX8OAAE4&_nc_ht=scontent.fmnl30-2.fna&oh=03_AVLCAiajM2M2ACN_CDrrsm7Qe9wnoz-g02NbBHiyCnTcsw&oe=6252079C" id="header-img">
+      <p class="logo-text">COVID-19 Locational Tracker</p>
+    </div>
+    <div class="right-menu">
+      <button class="menu-button">Menu</button>
+		  <nav id="nav-bar">
+			<a href="home page1.html" class="nav-link">Home</a>
+			<a href="map1.html" class="nav-link">Map</a>
+			<a href="database1.html" class="nav-link">Database</a>
+		  </nav>
+    </div>
+  </div>
+</header>
+
+<!-- START OF FORM -->
+<body id="home-body">
+<div class="home-container">
+    <h1 id="title">INFORMATION FORM</h1>
+    <p id="description">Kindly fill out the form below.</p>
+	<p id ="test"></p>
+  
+  <div class="survey-div">
+   <form id="survey-form">
+    <div class="dropdown-div">
+      <p class="question">Locations Visited:</p>
+      <select name="locations" id="dropdown" name="grade" required>
+        <option disabled selected value="unselected">Select your location</option>
+        <option value="caloocan">SM Center Sangandaan</option>
+        <option value="manila">SM City Manila</option>
+        <option value="taguig">SM City Bicutan</option>
+      </select>
+     </div>
+    <div class="text-div">
+     <br><label id="date-label" for="date">Date:</label>
+	 <input type="date" name="dates" id="date-of-visit" class="survey-questions" placeholder="Enter your date of visit">
+    </div>
+	
+	<div class="radio-div">
+      <br><p class="question">What was your symptom status at the time of your visit?</p>
+        <input type="radio" name="ss" id="symptomatic" value="Symptomatic">
+        <label for="symptomatic">Symptomatic</label><br>
+        <input type="radio" name="ss" id="asymptomatic" value="Asymptomatic">
+        <label for="asymptomatic">Asymptomatic</label><br><br>
+     </div>
+     
+     <!-- START OF BUTTON -->
+     <div class="button">
+	 <!-- onclick = "location.href = 'thank you.html';" -->
+		<button type="submit" onclick = "checkFunc()" name="submit" id="submit" class="submit-button">Submit</button>
+     </div>
+     <!-- END OF BUTTON -->
+    </form>
+   </div>
+  <!-- END OF FORM -->
+ </div>
+</body>
+<script>
+const addData = (ev)=>{
+	ev.preventDefault();
+	var current = JSON.parse(localStorage.getItem("Dataset")||"[]");
+	var dateOfVisit = document.getElementById("date-of-visit").value;
+	var symptoms = document.getElementsByName("ss");
+	var locations = document.getElementsByName("locations");
+	for(i = 0; i < symptoms.length; i++) {
+		for(r = 0; r < locations.length; r++) {
+			if(symptoms[i].checked && locations[r].value){
+				var data = {
+					date: dateOfVisit,
+					ss: symptoms[i].value,
+					locations: locations[r].value
+				}
+			current.push(data);
+			}
+		}
+    }
+	
+	function checkFunc() {
+		if (document.querySelector(".dropdown-div select").value != "unselected" && dateOfVisit && document.querySelectorAll('input[type="radio"]:checked').length > 0){
+			localStorage.setItem("Dataset", JSON.stringify(current));
+			window.open("thank you.html", "_self");
+		}
+		else{
+			alert("Fill out the entire form.");
+		}
+	}
+	checkFunc();
+	document.forms[0].reset();
+	
+}
+document.addEventListener("DOMContentLoaded", ()=>{
+	document.getElementById("submit").addEventListener("click", addData);
+});
+/*
+
+FOR TESTING PURPOSES
+
+var test = Object.keys(JSON.parse(localStorage.getItem('Dataset'))).length;
+var testing = document.getElementById('test');
+testing.innerHTML = test;
+
+var dataValue = JSON.parse(localStorage.getItem("Dataset"));
+var visits = Object.keys(JSON.parse(localStorage.getItem('Dataset'))).length;
+let countCaloocan = dataValue.filter(x => x.locations == "caloocan");
+let countManila = dataValue.filter(x => x.locations == "manila");
+let countTaguig = dataValue.filter(x => x.locations == "taguig");
+var testing = document.getElementById('test');
+testing.innerHTML =  dataValue.length;
+
+*/
+
+</script>
+</html>

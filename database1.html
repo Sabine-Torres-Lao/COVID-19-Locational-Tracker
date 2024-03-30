@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet"  type="text/css" href="styles1.css">
+</head>
+
+<!-- START OF HEADER -->
+<header id="header">
+  <div class="wrapper">
+    <div class="logo">
+      <img src="https://scontent.fmnl30-2.fna.fbcdn.net/v/t1.15752-9/275092832_300683318829693_4508308481604905390_n.png?_nc_cat=100&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHhwM2DWMzrrZBx__HQwm5IgTGlMy3FRkyBMaUzLcVGTIWnkA4-Ss3Qw8hLdqo_KOSiwCF_7AZbXL9aww_wLZmS&_nc_ohc=AuR0_U1sPI0AX8OAAE4&_nc_ht=scontent.fmnl30-2.fna&oh=03_AVLCAiajM2M2ACN_CDrrsm7Qe9wnoz-g02NbBHiyCnTcsw&oe=6252079C" id="header-img">
+      <p class="logo-text">COVID-19 Locational Tracker</p>
+    </div>
+    <div class="right-menu">
+      <button class="menu-button">Menu</button>
+      <nav id="nav-bar">
+        <a href="home page1.html" class="nav-link">Home</a>
+        <a href="map1.html" class="nav-link">Map</a>
+        <a href="database1.html" class="nav-link">Database</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<body id="database-body">
+	<div class="database-container">
+		<div class="nav-database">
+			<div class="database-title-div">
+				<h1 class="database-title">LOCATIONS</h1>
+			</div>
+			<ul>
+				<li><button onclick="toggleCaloocan()" id="caloocan-button" class="contentButton">SM Center Sangandaan</button></li>
+				<li><button onclick="toggleManila()" class="contentButton">SM City Manila</button></li>
+				<li><button onclick="toggleTaguig()" class="contentButton">SM City Bicutan</button></li>
+			</ul>
+		</div>
+		<div class="main-div">
+			<section  id="caloocan-data">
+				<header>
+					<h2>SM Center Sangandaan</h2>
+				</header>
+				<div id="data-text-caloocan" class="data-text">
+					<p></p>
+				</div>
+				<article>
+					<table id ="table1">
+						<tr>
+							<th>Date of Visit</th>
+							<th>Symptom Status</th>
+						</tr>
+					</table>
+				</article>
+			</section>
+			<section id="manila-data">
+				<header>
+					<h2>SM City Manila</h2>
+				</header>
+				<div id="data-text-manila" class="data-text">
+					<p></p>
+				</div>
+				<article>
+					<table id ="table2">
+						<tr>
+							<th>Date of Visit</th>
+							<th>Symptom Status</th>
+						</tr>
+					</table>
+				</article>
+			</section>
+			<section id="taguig-data">
+				<header>
+					<h2>SM City Bicutan</h2>
+				</header>
+				<div id="data-text-taguig" class="data-text">
+					<p></p>
+				</div>
+				<article>
+					<table id="table3">
+						<tr>
+							<th>Date of Visit</th>
+							<th>Symptom Status</th>
+						</tr>
+					</table>
+				</article>
+			</section>
+		</div>
+		<br><br>
+		<button onclick="document.body.offsetHeight;window.print();" id="report-button">Print Report</button>
+	</div>
+	
+	
+</body>
+<!-- START OF JAVASCRIPT -->
+<script type="text/javascript">// <![CDATA[
+document.body=function(){document.body.offsetHeight;window.print()};
+// ]]></script>
+
+<script>
+
+// VARIIABLES
+	var caloocanContent = document.getElementById("caloocan-data");
+	var displaySetting = caloocanContent.style.display;
+	var manilaContent = document.getElementById("manila-data");
+	var displaySetting = manilaContent.style.display;
+	var taguigContent = document.getElementById("taguig-data");
+	var displaySetting = taguigContent.style.display;
+	var dataTextCaloocan = document.getElementById("data-text-caloocan");
+	var dataTextManila = document.getElementById("data-text-manila");
+	var dataTextTaguig = document.getElementById("data-text-taguig");
+	var tableCaloocan = document.getElementById("table1");
+	var tableManila = document.getElementById("table2");
+	var tableTaguig= document.getElementById("table3");
+	
+// START OF CODE FOR DISPLAYING CONTENT
+
+	caloocanContent.style.display = "block";
+	manilaContent.style.display = "none";
+	taguigContent.style.display = "none";
+	
+	tableCaloocan.style.border = tableManila.style.border = tableTaguig.style.border = "0px";
+	
+	dataTextCaloocan.innerHTML = "There are no recorded visits in this location.";
+	tableCaloocan.style.display = "none";
+	dataTextManila.innerHTML = "There are no recorded visits in this location.";
+	tableManila.style.display = "none";
+	dataTextTaguig.innerHTML = "There are no recorded visits in this location.";
+	tableTaguig.style.display = "none";
+	
+	
+	function toggleCaloocan(){
+		if (displaySetting == "block"){
+			<!-- hides content -->
+			caloocanContent.style.display = "none";
+		}
+		else{
+			<!-- shows content -->
+			caloocanContent.style.display = "block";
+			manilaContent.style.display = "none";
+			taguigContent.style.display = "none";
+		}
+	}
+	function toggleManila(){
+		if (displaySetting == "block"){
+			<!-- hides content -->
+			manilaContent.style.display = "none";
+		}
+		else{
+			<!-- shows content -->
+			manilaContent.style.display = "block";
+			caloocanContent.style.display = "none";
+			taguigContent.style.display = "none";
+		}
+	}
+	function toggleTaguig(){
+		if (displaySetting == "block"){
+			<!-- hides content -->
+			taguigContent.style.display = "none";
+		}
+		else{
+			<!-- shows content -->
+			taguigContent.style.display = "block";
+			caloocanContent.style.display = "none";
+			manilaContent.style.display = "none";
+		}
+	}
+	
+	var dataValue = JSON.parse(localStorage.getItem("Dataset"));
+	
+	let countCaloocan = dataValue.filter(x => x.locations == "caloocan");
+	let caloocanSymp = countCaloocan.filter(x => x.ss == "Symptomatic");
+	let caloocanAsymp = countCaloocan.filter(x => x.ss == "Asymptomatic");
+	
+	let countManila = dataValue.filter(x => x.locations == "manila");
+	let manilaSymp = countManila.filter(x => x.ss == "Symptomatic");
+	let manilaAsymp = countManila.filter(x => x.ss == "Asymptomatic");
+	
+	let countTaguig = dataValue.filter(x => x.locations == "taguig");
+	let taguigSymp = countTaguig.filter(x => x.ss == "Symptomatic");
+	let taguigAsymp = countTaguig.filter(x => x.ss == "Asymptomatic");
+	
+	function changeContent(){
+		if (countCaloocan.length > 0) {
+			dataTextCaloocan.innerHTML = "Total Number of Visits (1 Month): " + countCaloocan.length + "<br>" + "Total Number of Symptomatic: " + caloocanSymp.length + "<br>" + "Total Number of Asymptomatic: " + caloocanAsymp.length + "<br>" + "<br>";
+			tableCaloocan.style.display = "block";
+		}
+		if (countManila.length > 0){
+			dataTextManila.innerHTML = "Total Number of Visits (1 Month): " + countManila.length + "<br>" + "Total Number of Symptomatic: " + manilaSymp.length + "<br>" + "Total Number of Asymptomatic: " + manilaAsymp.length + "<br>" + "<br>";
+			tableManila.style.display = "block";
+		}
+		if (countTaguig.length > 0){
+			dataTextTaguig.innerHTML = "Total Number of Visits (1 Month): " + countTaguig.length + "<br>" + "Total Number of Symptomatic: " + taguigSymp.length + "<br>" + "Total Number of Asymptomatic: " + taguigAsymp.length + "<br>" + "<br>";
+			tableTaguig.style.display = "block";
+		}
+	}
+	changeContent();
+	
+	// END OF CODE FOR DISPLAYING CONTENT
+	
+	//start of loop
+	for (let i = 0; i <= dataValue.length; i++){
+		
+		if(dataValue[i].locations == "caloocan"){
+			var caloocanRow = tableCaloocan.insertRow(1);
+			var caloocanCell1 = caloocanRow.insertCell(0);
+			var  caloocanCell2 = caloocanRow.insertCell(1);
+			caloocanCell1.innerHTML = dataValue[i].date; 
+			caloocanCell2.innerHTML = dataValue[i].ss;
+		}
+		
+		if(dataValue[i].locations == "manila"){
+			var manilaRow = tableManila.insertRow(1);
+			var manilaCell1 = manilaRow.insertCell(0);
+			var  manilaCell2 = manilaRow.insertCell(1);
+			manilaCell1.innerHTML = dataValue[i].date; 
+			manilaCell2.innerHTML = dataValue[i].ss;
+		}
+		
+		if(dataValue[i].locations == "taguig"){
+			var taguigRow = tableTaguig.insertRow(1);
+			var taguigCell1 = taguigRow.insertCell(0);
+			var  taguigCell2 = taguigRow.insertCell(1);
+			taguigCell1.innerHTML = dataValue[i].date; 
+			taguigCell2.innerHTML = dataValue[i].ss;
+		}
+	}
+	
+</script>
+</html>

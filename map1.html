@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles1.css">
+  <style>
+	#transparent-dot1, #transparent-dot2, #transparent-dot3{
+		background: transparent;
+	}
+	#dot1, #dot2, #dot3{
+		background: radial-gradient(circle at center, red 0%, transparent 75%);
+	}
+	#dot1b, #dot2b, #dot3b{
+		background: radial-gradient(circle at center, yellow 0%, transparent 75%);
+	}
+	#dot1c, #dot2c, #dot3c{
+		background: radial-gradient(circle at center, orange 0%, transparent 75%);
+	}
+	.dot-animation{
+		animation-name: pulsing;
+		animation-duration: 1.25s;
+		animation-iteration-count: infinite;
+	}
+	@keyframes pulsing {
+	  0% {
+		transform: scale(0.20);
+	  }
+	  100% {
+		opacity: 0;
+	  }
+	}
+	.dots {
+	  border-radius: 50%;
+	  height: auto;
+	  background-position: top center;
+	  background-repeat: no-repeat;
+	  background-size: contain;
+	  position: absolute;
+	  cursor: pointer;
+	}
+	.transparent-dots:hover > .dot-text-div{
+	  display: block;
+	}
+	.dot-text-div{
+	  cursor: auto;
+	  line-height: 1.6;
+	  position: absolute;
+	  top: 50%;
+	  transform:translateY(-50%);
+	  left:80%;
+	  white-space: nowrap;
+	  display: none;
+	}
+	.dot-text{
+	  background-color: white;
+	  padding: 1.7em 5em 2.5em 1.5em;
+	  text-align: left;
+	  box-shadow: 4px 4px 15px 2px black;
+	  font-size: 1.2em;
+	}
+	.img{
+		position: absolute;
+		z-index: 2;
+	}
+	th, tr, td{
+		font-size: 1.1em;
+		padding: 10px;
+	}
+	.tables{
+		margin-left: -2em;
+		margin-bottom: 1.5em;
+		width: 45%;
+	}
+	@media (max-width: 1350px){
+		th, tr, td{
+			font-size: 1em;
+		}
+	}
+	@media (max-width: 1200px){
+		.dot-text{
+			font-size: 1em;
+		}
+	}
+	@media (max-width: 1100px){
+		th, tr, td{
+			font-size: 0.9em;
+		}
+	}
+	@media (max-width: 1000px){
+		.dot-text{
+			font-size: 0.7em;
+		}
+		th, tr, td{
+			font-size: 0.85em;
+		}
+	}
+	@media (max-width: 900px){
+		th, tr, td{
+			padding: 5px;
+		}
+	}
+	@media (max-width: 880px){
+		th, tr, td{
+			font-size: 0.8em;
+		}
+	}
+	@media (max-width: 800px){
+		th, tr, td{
+			padding: 4px;
+		}
+	}
+	@media (max-width: 750px){
+		th, tr, td{
+			font-size: 0.8em;;
+		}
+		.tables{
+			margin-bottom: 0.3em;
+		}
+	}
+	@media (max-width: 650px){
+		th, tr, td{
+			font-size: 0.7em;
+			padding: 3px;
+		}
+		.tables{
+			margin-bottom: 0.2em;
+		}
+	}
+	
+  </style>
+</head>
+<!-- START OF HEADER -->
+<header id="header">
+  <div class="wrapper">
+    <div class="logo">
+      <img src="https://scontent.fmnl30-2.fna.fbcdn.net/v/t1.15752-9/275092832_300683318829693_4508308481604905390_n.png?_nc_cat=100&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHhwM2DWMzrrZBx__HQwm5IgTGlMy3FRkyBMaUzLcVGTIWnkA4-Ss3Qw8hLdqo_KOSiwCF_7AZbXL9aww_wLZmS&_nc_ohc=AuR0_U1sPI0AX8OAAE4&_nc_ht=scontent.fmnl30-2.fna&oh=03_AVLCAiajM2M2ACN_CDrrsm7Qe9wnoz-g02NbBHiyCnTcsw&oe=6252079C" id="header-img">
+      <p class="logo-text">COVID-19 Locational Tracker</p>
+    </div>
+    <div class="right-menu">
+      <button class="menu-button">Menu</button>
+      <nav id="nav-bar">
+		<a href="home page1.html" class="nav-link">Home</a>
+        <a href="map1.html" class="nav-link">Map</a>
+        <a href="database1.html" class="nav-link">Database</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- START OF MAP AND DOTS-->
+<body id="map-body">
+	<div class="container-map">
+		<section id="map-img-section">
+			<div class="map-text">
+				<h1>COVID-19 Heat Map</h1>
+				<p>This map displays the intensity of COVID-19 cases in a single area in Metro Manila. The bigger the red circle is, the more cases that are concentrated in that area. Hover over the circles to see more details about an area.</p>
+				<p id ="test" style="color:#ffd414"><b>Yellow</b> - Less than 50 cases</p>
+				<p style="color:orange"><b>Orange</b> - More than 50 cases</p>
+				<p style="color:red"><b>Red</b> - More than 100 cases</p>
+			</div>
+			<img class="map-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Metro_Manila_in_the_Philippines.png" alt="a map">
+			
+			<img id= "caloocan-img" class="img" onclick="toggleCaloocan()">
+			<div id="dot1" class="dots dot-animation"></div>
+			<div id="dot1b" class="dots dot-animation"></div>
+			<div id="dot1c" class="dots dot-animation"></div>
+			<div id="transparent-dot1" class="dots transparent-dots">
+				<div class="dot-text-div">
+					<p id="caloocan-text" class="dot-text">
+					</p>
+				</div>
+			</div>
+			
+			
+			<!-- caloocan table -->
+			
+			<section  class ="tables" id="caloocan-data">
+				<article>
+					<table id ="table1">
+						<tr>
+							<td colspan = "2"><b><center>SM Center Sangandaan</center></b></td>
+						</tr>
+						<tr>
+							<th>Date of Visit</th>
+							<th>Symptom Status</th>
+						</tr>
+						<tr>
+							<td colspan = "2"><b><center><a class="moreInfo" href="database1.html">More Information</a></center></b></td>
+						</tr>
+					</table>
+				</article>
+			</section>
+			
+			<img src="" id= "manila-img" class="img" onclick="toggleManila()">
+			<div id="dot2" class="dots dot-animation"></div>
+			<div id="dot2b" class="dots dot-animation"></div>
+			<div id="dot2c" class="dots dot-animation"></div>
+			<div id="transparent-dot2" class="dots transparent-dots">
+				<div class="dot-text-div">
+					<p id="manila-text" class="dot-text">
+					</p>
+				</div>
+			</div>
+			
+			<!-- manila table -->
+			
+			<section  class ="tables" id="manila-data">
+				<article>
+					<table id ="table2">
+						<tr>
+							<td colspan = "2"><b><center>SM City Manila</center></b></td>
+						</tr>
+						<tr>
+							<th>Date of Visit</th>
+							<th>Symptom Status</th>
+						</tr>
+						<tr>
+							<td colspan = "2"><b><center><a class="moreInfo" href="database1.html">More Information</a></center></b></td>
+						</tr>
+					</table>
+				</article>
+			</section>
+			
+			<img src="" id= "taguig-img" class="img" onclick ="toggleTaguig()">
+			<div id="dot3" class="dots dot-animation"></div>
+			<div id="dot3b" class="dots dot-animation"></div>
+			<div id="dot3c" class="dots dot-animation"></div>
+			<div id="transparent-dot3" class="dots transparent-dots">
+				<div class="dot-text-div">
+					<p id="taguig-text" class="dot-text">
+					</p>
+				</div>
+			</div>
+			
+			<!-- taguig table -->
+			
+			<section  class ="tables" id="taguig-data">
+				<article>
+					<table id ="table3">
+						<tr>
+							<td colspan = "2"><b><center>SM City Bicutan</center></b></td>
+						</tr>
+						<tr>
+							<th>Date of Visit</th>
+							<th>Symptom Status</th>
+						</tr>
+						<tr>
+							<td colspan = "2"><b><center><a class="moreInfo" href="database1.html">More Information</a></center></b></td>
+						</tr>
+					</table>
+				</article>
+			</section>
+			
+		</section>
+	</div>
+
+<!-- START OF JAVASCRIPT -->
+<script>
+var dataValue = JSON.parse(localStorage.getItem("Dataset"));
+
+/*tables*/
+var caloocanContent = document.getElementById("caloocan-data");
+caloocanContent.style.display = "none";
+var tableCaloocan = document.getElementById("table1");
+
+function toggleCaloocan(){
+	if (caloocanContent.style.display == "block"){
+		<!-- hides content -->
+		caloocanContent.style.display = "none";
+	}
+	else{
+		<!-- shows content -->
+		caloocanContent.style.display = "block";
+		for (let i = 0; i <= dataValue.length; i++){
+			if (dataValue[i].locations == "caloocan" && tableCaloocan.rows.length < 6){
+				var caloocanRow = tableCaloocan.insertRow(2);
+				var caloocanCell1 = caloocanRow.insertCell(0);
+				var  caloocanCell2 = caloocanRow.insertCell(1);
+				caloocanCell1.innerHTML = dataValue[i].date; 
+				caloocanCell2.innerHTML = dataValue[i].ss;	
+			}
+		}
+	}
+}
+
+var manilaContent = document.getElementById("manila-data");
+manilaContent.style.display = "none";
+var tableManila = document.getElementById("table2");
+
+function toggleManila(){
+	if (manilaContent.style.display == "block"){
+		<!-- hides content -->
+		manilaContent.style.display = "none";
+	}
+	else{
+		<!-- shows content -->
+		manilaContent.style.display = "block";
+		for (let i = 0; i <= dataValue.length; i++){
+			if(dataValue[i].locations == "manila"  && tableManila.rows.length < 6){
+				var manilaRow = tableManila.insertRow(2);
+				var manilaCell1 = manilaRow.insertCell(0);
+				var  manilaCell2 = manilaRow.insertCell(1);
+				manilaCell1.innerHTML = dataValue[i].date; 
+				manilaCell2.innerHTML = dataValue[i].ss;
+			}
+		}
+	}
+}
+
+var taguigContent = document.getElementById("taguig-data");
+taguigContent.style.display = "none";
+var tableTaguig = document.getElementById("table3");
+
+function toggleTaguig(){
+	if (taguigContent.style.display == "block"){
+		<!-- hides content -->
+		taguigContent.style.display = "none";
+	}
+	else{
+		<!-- shows content -->
+		taguigContent.style.display = "block";
+		for (let i = 0; i <= dataValue.length; i++){
+			if(dataValue[i].locations == "taguig"   && tableTaguig.rows.length < 6){
+				var taguigRow = tableTaguig.insertRow(2);
+				var taguigCell1 = taguigRow.insertCell(0);
+				var  taguigCell2 = taguigRow.insertCell(1);
+				taguigCell1.innerHTML = dataValue[i].date; 
+				taguigCell2.innerHTML = dataValue[i].ss;
+			}
+		}
+	}
+}
+
+var pulsatingCircle1 = document.getElementById('dot1');
+var pulsatingCircle1b = document.getElementById('dot1b');
+var pulsatingCircle1c = document.getElementById('dot1c');
+var transparentCircle1 = document.getElementById('transparent-dot1');
+var caloocanText = document.getElementById('caloocan-text');
+var caloocanImg = document.getElementById('caloocan-img');
+
+
+var pulsatingCircle2 = document.getElementById('dot2');
+var pulsatingCircle2b = document.getElementById('dot2b');
+var pulsatingCircle2c = document.getElementById('dot2c');
+var transparentCircle2 = document.getElementById('transparent-dot2');
+var manilaText = document.getElementById('manila-text');
+var manilaImg = document.getElementById('manila-img');
+
+var pulsatingCircle3 = document.getElementById('dot3');
+var pulsatingCircle3b = document.getElementById('dot3b');
+var pulsatingCircle3c = document.getElementById('dot3c');
+var transparentCircle3 = document.getElementById('transparent-dot3');
+var taguigText = document.getElementById('taguig-text');
+var taguigImg = document.getElementById('taguig-img');
+
+var moreInfo = "More Information";
+var link = moreInfo.link("database1.html")
+
+var visits = Object.keys(JSON.parse(localStorage.getItem('Dataset'))).length;
+
+let countCaloocan = dataValue.filter(x => x.locations == "caloocan");
+let caloocanSymp = countCaloocan.filter(x => x.ss == "Symptomatic");
+let caloocanAsymp = countCaloocan.filter(x => x.ss == "Asymptomatic");
+	
+let countManila = dataValue.filter(x => x.locations == "manila");
+let manilaSymp = countManila.filter(x => x.ss == "Symptomatic");
+let manilaAsymp = countManila.filter(x => x.ss == "Asymptomatic");
+	
+let countTaguig = dataValue.filter(x => x.locations == "taguig");
+let taguigSymp = countTaguig.filter(x => x.ss == "Symptomatic");
+let taguigAsymp = countTaguig.filter(x => x.ss == "Asymptomatic");
+
+function mapCircles(){
+	//Caloocan
+	if (countCaloocan.length == 0){
+		pulsatingCircle1.style.background = pulsatingCircle1b.style.background = pulsatingCircle1c.style.background = 'transparent';
+	}
+	else if (countCaloocan.length <= 49){
+		pulsatingCircle1.style.background = pulsatingCircle1c.style.background = 'transparent';
+		pulsatingCircle1b.style.width = pulsatingCircle1b.style.paddingTop = transparentCircle1.style.width = transparentCircle1.style.paddingTop = '10%';
+		pulsatingCircle1b.style.top = transparentCircle1.style.top = '27%';
+		pulsatingCircle1b.style.left = transparentCircle1.style.left = '46%';
+		caloocanImg.style.visibility="visible";
+		caloocanImg.src="warning1.png";
+		caloocanImg.style.top = '27%';
+		caloocanImg.style.left = '50%';
+		caloocanText.innerHTML = "<b>SM Center Sangandaan</b>" + "<br>" + "Total Confirmed Visits: " + countCaloocan.length + "<br>" + "Symptomatic Cases: " + caloocanSymp.length + "<br>" + "Asymptomatic Cases: " + caloocanAsymp.length + "<br>" + link;
+	}	
+	else if (countCaloocan.length <= 99){
+		pulsatingCircle1.style.background = pulsatingCircle1b.style.background = 'transparent';
+		pulsatingCircle1c.style.width = pulsatingCircle1c.style.paddingTop = transparentCircle1.style.width = transparentCircle1.style.paddingTop = '20%';
+		pulsatingCircle1c.style.top = transparentCircle1.style.top = '23%';
+		pulsatingCircle1c.style.left = transparentCircle1.style.left = '42%';
+		caloocanImg.style.visibility="visible";
+		caloocanImg.src="warning2.png";
+		caloocanImg.style.top = '27%';
+		caloocanImg.style.left = '50%';
+		caloocanText.innerHTML = "<b>SM Center Sangandaan</b>" + "<br>" + "Total Confirmed Visits: " + countCaloocan.length + "<br>" + "Symptomatic Cases: " + caloocanSymp.length + "<br>" + "Asymptomatic Cases: " + caloocanAsymp.length + "<br>" + link;
+	}
+	else if (countCaloocan.length > 99){
+		pulsatingCircle1b.style.background = pulsatingCircle1c.style.background = 'transparent';
+		pulsatingCircle1.style.width = pulsatingCircle1.style.paddingTop = transparentCircle1.style.width = transparentCircle1.style.paddingTop = '30%';
+		pulsatingCircle1.style.top = transparentCircle1.style.top = '19%';
+		pulsatingCircle1.style.left = transparentCircle1.style.left = '37%';
+		caloocanImg.style.visibility="visible";
+		caloocanImg.src="warning3.png";
+		caloocanImg.style.top = '27%';
+		caloocanImg.style.left = '50%';
+		caloocanText.innerHTML = "<b>SM Center Sangandaan</b>" + "<br>" + "Total Confirmed Visits: " + countCaloocan.length + "<br>" + "Symptomatic Cases: " + caloocanSymp.length + "<br>" + "Asymptomatic Cases: " + caloocanAsymp.length + "<br>" + link;
+	}
+	
+	//Manila
+	if (countManila.length == 0){
+		pulsatingCircle2.style.background = pulsatingCircle2b.style.background = pulsatingCircle2c.style.background = 'transparent';
+	}
+	else if (countManila.length <= 49){
+		pulsatingCircle2.style.background = pulsatingCircle2c.style.background = 'transparent';
+		pulsatingCircle2b.style.width = pulsatingCircle2b.style.paddingTop = transparentCircle2.style.width = transparentCircle2.style.paddingTop = '10%';
+		pulsatingCircle2b.style.top = transparentCircle2.style.top = '38%';
+		pulsatingCircle2b.style.left = transparentCircle2.style.left = '48%';
+		manilaImg.style.visibility="visible";
+		manilaImg.src="warning1.png";
+		manilaImg.style.top = '38.5%';
+		manilaImg.style.left = '51.8%';
+		manilaText.innerHTML = "<b>SM City Manila</b>" + "<br>" + "Total Confirmed Visits: " + countManila.length + "<br>" + "Symptomatic Cases: " + manilaSymp.length + "<br>" + "Asymptomatic Cases: " + manilaAsymp.length + "<br>" + link;
+	}
+	else if (countManila.length <= 99){
+		pulsatingCircle2.style.background = pulsatingCircle2b.style.background = 'transparent';
+		pulsatingCircle2c.style.width = pulsatingCircle2c.style.paddingTop = transparentCircle2.style.width = transparentCircle2.style.paddingTop = '20%';
+		pulsatingCircle2c.style.top = transparentCircle2.style.top = '34.5%';
+		pulsatingCircle2c.style.left = transparentCircle2.style.left = '44%';
+		manilaImg.style.visibility="visible";
+		manilaImg.src="warning2.png";
+		manilaImg.style.top = '38.5%';
+		manilaImg.style.left = '51.8%';
+		manilaText.innerHTML = "<b>SM City Manila</b>" + "<br>" + "Total Confirmed Visits: " + countManila.length + "<br>" + "Symptomatic Cases: " + manilaSymp.length + "<br>" + "Asymptomatic Cases: " + manilaAsymp.length + "<br>" + link;
+	}
+	else if (countManila.length > 99){
+		pulsatingCircle2b.style.background = pulsatingCircle2c.style.background = 'transparent';
+		pulsatingCircle2.style.width = pulsatingCircle2.style.paddingTop = transparentCircle2.style.width = transparentCircle2.style.paddingTop = '30%';
+		pulsatingCircle2.style.top = transparentCircle2.style.top = '31%';
+		pulsatingCircle2.style.left = transparentCircle2.style.left = '39%';
+		manilaImg.style.visibility="visible";
+		manilaImg.src="warning3.png";
+		manilaImg.style.top = '38.5%';
+		manilaImg.style.left = '51.8%';
+		manilaText.innerHTML = "<b>SM City Manila</b>" + "<br>" + "Total Confirmed Visits: " + countManila.length + "<br>" + "Symptomatic Cases: " + manilaSymp.length + "<br>" + "Asymptomatic Cases: " + manilaAsymp.length + "<br>" + link;
+	}
+	
+	
+	//Taguig
+	if (countTaguig.length == 0){
+		pulsatingCircle3.style.background = pulsatingCircle3b.style.background = pulsatingCircle3c.style.background = 'transparent';
+	}
+	else if (countTaguig.length <= 49){
+		pulsatingCircle3.style.background = pulsatingCircle3c.style.background = 'transparent';
+		pulsatingCircle3b.style.width = pulsatingCircle3b.style.paddingTop = transparentCircle3.style.width = transparentCircle3.style.paddingTop = '10%';
+		pulsatingCircle3b.style.top = transparentCircle3.style.top = '56.3%';
+		pulsatingCircle3b.style.left = transparentCircle3.style.left = '69%';
+		taguigImg.style.visibility="visible";
+		taguigImg.src="warning1.png";
+		taguigImg.style.top = '56%';
+		taguigImg.style.left = '72.5%';
+		taguigText.innerHTML = "<b>SM City Bicutan</b>" + "<br>" + "Total Confirmed Visits: " + countTaguig.length + "<br>" + "Symptomatic Cases: " + taguigSymp.length + "<br>" + "Asymptomatic Cases: " + taguigAsymp.length + "<br>" + link;
+	}
+	else if (countTaguig.length <= 99){
+		pulsatingCircle3.style.background = pulsatingCircle3b.style.background = 'transparent';
+		pulsatingCircle3c.style.width = pulsatingCircle3c.style.paddingTop = transparentCircle3.style.width = transparentCircle3.style.paddingTop = '20%';
+		pulsatingCircle3c.style.top = transparentCircle3.style.top = '52.5%';
+		pulsatingCircle3c.style.left = transparentCircle3.style.left = '64%';
+		taguigImg.style.visibility="visible";
+		taguigImg.src="warning2.png";
+		taguigImg.style.top = '56%';
+		taguigImg.style.left = '72.5%';
+		taguigText.innerHTML = "<b>SM City Bicutan</b>" + "<br>" + "Total Confirmed Visits: " + countTaguig.length + "<br>" + "Symptomatic Cases: " + taguigSymp.length + "<br>" + "Asymptomatic Cases: " + taguigAsymp.length + "<br>" + link;
+	}
+	else if (countTaguig.length > 99){
+		pulsatingCircle3b.style.background = pulsatingCircle3c.style.background = 'transparent';
+		pulsatingCircle3.style.width = pulsatingCircle3.style.paddingTop = transparentCircle3.style.width = transparentCircle3.style.paddingTop = '30%';
+		pulsatingCircle3.style.top = transparentCircle3.style.top = '48.5%';
+		pulsatingCircle3.style.left = transparentCircle3.style.left = '59%';
+		taguigImg.style.visibility="visible";
+		taguigImg.src="warning3.png";
+		taguigImg.style.top = '56%';
+		taguigImg.style.left = '72.5%';
+		taguigText.innerHTML = "<b>SM City Bicutan</b>" + "<br>" + "Total Confirmed Visits: " + countTaguig.length + "<br>" + "Symptomatic Cases: " + taguigSymp.length + "<br>" + "Asymptomatic Cases: " + taguigAsymp.length + "<br>" + link;
+	}
+	
+}
+mapCircles();
+
+</script>
+</body>
+</html>
